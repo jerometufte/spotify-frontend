@@ -2,7 +2,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { PATHS } from './paths';
 
 export default function PrivateRoute() {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('access_token');
   
-  return token ? <Outlet /> : <Navigate to={PATHS.LOGIN} />;
+  return token ? <Outlet /> : <Navigate to={PATHS.HOME} />;
 } 

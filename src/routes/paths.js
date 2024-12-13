@@ -3,6 +3,8 @@ export const PATHS = {
   HOME: '/',
   SPOTIFY_AUTH: '/spotify-auth',
   CALLBACK: '/callback',
-  PLAYLIST: '/playlist-randomizer',
+  PLAYLISTS: '/playlists',
+  PLAYLIST: '/playlist/:id',
+  USER: '/user',
   // ... other routes
 }; 

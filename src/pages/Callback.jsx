@@ -5,42 +5,38 @@ const Callback = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const handleCallback = async () => {
-            // Get the code from URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const code = urlParams.get('code');
-            console.log(window.location)
-            console.log(code);
-            console.log(urlParams);
+        const handleCallback = () => {
+            // Only process if there's actually a hash
+            if (!window.location.hash) {
+                return;
+            }
+
+            // Get the access_token from URL hash parameters
+            const hashParams = new URLSearchParams(window.location.hash.substring(1));
+            const accessToken = hashParams.get('access_token');
             
-            if (!code) {
-                console.error('No code found in URL');
+            if (!accessToken) {
+                console.error('No access token found in URL');
                 navigate('/');
                 return;
             }
 
-            try {
-                // Exchange code for tokens with your backend
-                const response = await fetch(`http://localhost:8888/callback?code=${code}`);
-                const data = await response.json();
+            // Store access token
+            localStorage.setItem('access_token', accessToken);
 
-                if (!response.ok) {
-                    throw new Error(data.detail || 'Failed to get tokens');
-                }
+            // Clear the hash from the URL
+            window.history.pushState("", document.title, window.location.pathname);
 
-                // Store tokens (consider using a more secure storage method or state management)
-                localStorage.setItem('access_token', data.access_token);
-                localStorage.setItem('refresh_token', data.refresh_token);
-
-                // Redirect to home or dashboard
-                navigate('/dashboard');
-            } catch (error) {
-                console.error('Error during callback:', error);
-                navigate('/', { state: { error: 'Authentication failed' } });
-            }
+            // Redirect to dashboard
+            navigate('/');
         };
 
         handleCallback();
+
+        // Cleanup function
+        return () => {
+            // Any cleanup if needed
+        };
     }, [navigate]);
 
     // Show loading state while processing
