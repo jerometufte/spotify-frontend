@@ -6,5 +6,6 @@ export const PATHS = {
   PLAYLISTS: '/playlists',
   PLAYLIST: '/playlist/:id',
   USER: '/user',
+  HELLO: '/hello',
   // ... other routes
 }; 

@@ -6,8 +6,9 @@ import Layout from '../components/Layout';
 
 // Import Home directly instead of lazy loading for debugging
 import Home from '../pages/Home';
-
+import Hello from '../pages/Hello';
 // Lazy load other pages
+
 const SpotifyAuth = lazy(() => import('../pages/SpotifyAuth'));
 const Callback = lazy(() => import('../pages/Callback'));
 const Playlists = lazy(() => import('../pages/Playlists'));
@@ -23,7 +24,7 @@ export default function AppRoutes() {
           <Route path={PATHS.HOME} element={<Home />} />
           <Route path={PATHS.SPOTIFY_AUTH} element={<SpotifyAuth />} />
           <Route path={PATHS.CALLBACK} element={<Callback />} />
-          
+          <Route path={PATHS.HELLO} element={<Hello />} />
           {/* Protected routes */}
           <Route element={<PrivateRoute />}>
             <Route path={PATHS.PLAYLISTS} element={<Playlists />} />
