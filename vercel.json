@@ -1,5 +1,6 @@
 {
   "rewrites": [
+    { "source": "/api/:path*", "destination": "https://desolate-beyond-43265-8ebf947c6d33.herokuapp.com/api:path*" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
